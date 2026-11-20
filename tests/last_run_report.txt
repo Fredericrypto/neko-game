@@ -1,0 +1,50 @@
+PASS  boot: nós principais existem  
+PASS  paleta: exatamente os seis tons oficiais  ["111111", "333333", "777777", "BEB8AD", "E6E1D7", "F6F4EE"]
+PASS  input map: ações definidas  
+PASS  chão: parado sem jitter (variação de y)  y=640.00 spread=0.0000
+PASS  corrida: velocidade máxima decresce com o peso  { 0.1: 464.399993896484, 0.42: 436.268920898438, 0.9: 361.200012207031 }
+PASS  corrida: valor coerente com o parâmetro (±3%)  436.3 vs 435.8
+PASS  caminhada: velocidade < corrida e dentro do parâmetro  233.2
+PASS  desaceleração: para em menos de 0,5 s e não instantaneamente  6 frames
+PASS  mudança de direção: inverte em menos de 0,4 s  3 frames
+PASS  salto: altura decresce com o peso  { 0.1: 146.74951171875, 0.42: 125.215881347656, 0.9: 84.6121215820312 }
+PASS  salto: faixas esperadas (leve ~150, normal ~130, pesado ~90)  { 0.1: 146.74951171875, 0.42: 125.215881347656, 0.9: 84.6121215820312 }
+PASS  salto: altura variável (toque curto < salto completo)  60.8 vs 125.2
+PASS  coyote time: salto aceito poucos frames após sair da borda  vy=-743.6
+PASS  jump buffer: salto pressionado antes de pousar é executado  
+PASS  rota principal: degrau de A cruza o vão até o terraço B (peso 0.10)  
+PASS  rota: terraço -> caixote (peso 0.10)  
+PASS  rota: caixote -> tubo S2 (peso 0.10)  
+PASS  rota: tubo S2 -> topo da torre (peso 0.10)  
+PASS  rota principal: degrau de A cruza o vão até o terraço B (peso 0.42)  
+PASS  rota: terraço -> caixote (peso 0.42)  
+PASS  rota: caixote -> tubo S2 (peso 0.42)  
+PASS  rota: tubo S2 -> topo da torre (peso 0.42)  
+PASS  rota principal: degrau de A cruza o vão até o terraço B (peso 0.90)  
+PASS  rota: terraço -> caixote (peso 0.90)  
+PASS  rota: caixote -> tubo S2 (peso 0.90)  
+PASS  rota: tubo S2 -> topo da torre (peso 0.90)  
+PASS  opcional H: gato leve alcança a passarela direto  
+PASS  opcional H: gato normal NÃO alcança direto (nenhum parâmetro de salto)  
+PASS  opcional H: gato pesado NÃO alcança direto (nenhum parâmetro de salto)  
+PASS  rota alternativa: torre -> saliência P1 (peso 0.42)  
+PASS  rota alternativa: P1 -> passarela H (peso 0.42)  
+PASS  rota alternativa: torre -> saliência P1 (peso 0.90)  
+PASS  rota alternativa: P1 -> passarela H (peso 0.90)  
+PASS  escada AB: sobe do beco ao terraço em 4 saltos (peso 0.42)  4/4
+PASS  escada AB: sobe do beco ao terraço em 4 saltos (peso 0.90)  4/4
+PASS  plataforma de mão única: S+Espaço desce  y=940.0
+PASS  plataforma de mão única: dá para subir atravessando por baixo  y=820.0
+PASS  parede: não atravessa e não treme (x < 2900, variação < 0,5 px)  x=2873.7 variação=0.000
+PASS  parede esquerda: limite do mundo  x=-257.1
+PASS  queda: sai da borda de C e pousa na escada/beco (não atravessa o chão)  pos=(2063.0, 900.0)
+PASS  ração: coletar aumenta contador e peso (+2%)  kibble=18 peso=0.440
+PASS  lata: coletar aumenta o peso em ~10%  peso=0.400
+PASS  metabolismo: correr reduz o peso devagar  0.6000 -> 0.5925
+PASS  porta: E abre e a janela acende  open=1.00
+PASS  porta: E fecha  
+PASS  queda no vazio: reaparece no ponto inicial  (220.0, 640.0)
+PASS  câmera: respeita o limite direito  centro=2643.5
+PASS  câmera: respeita o limite esquerdo  
+PASS  pose: parado é IDLE  
+Aprovados: 49   Falhos: 0
