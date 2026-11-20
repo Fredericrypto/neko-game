@@ -44,7 +44,8 @@ scripts/systems          palette.gd, game_audio.gd
 scripts/ui               hud.gd
 resources/movement_params.tres   TODOS os parâmetros de movimento e peso (editáveis no Inspetor)
 assets/audio|fonts       áudio gerado por tools/generate_audio.py; fonte Zen Kaku Gothic New (OFL)
-tests/                   run_tests.gd (49 testes) e last_run_report.txt
+locale/strings.csv      textos da interface (inglês); novos idiomas = novas colunas
+tests/                   run_tests.gd (55 testes) e last_run_report.txt
 tools/                   setup_input_map.gd, generate_audio.py, shot.gd, capture_demo.gd
 screenshots/             capturas reais da execução
 ```

@@ -12,7 +12,7 @@ var shown_weight := 0.42
 var paused := false
 var menu_index := 0
 var hint_time := 0.0
-var _items := ["RESUME", "RESTART", "QUIT"]
+var _items := ["RESUME", "RESTART", "QUIT"]  # ids; o texto exibido vem de tr("UI_" + id)
 var _gauge_bg := StyleBoxFlat.new()
 var _gauge_fill := StyleBoxFlat.new()
 
@@ -89,14 +89,14 @@ func _draw_hud() -> void:
 	if player == null:
 		return
 	# --- medidor de peso (conceito: WEIGHT / barra / 42%)
-	_txt(Vector2(44.0, 50.0), "WEIGHT", 14, Palette.CHARCOAL, true)
+	_txt(Vector2(44.0, 50.0), tr("UI_WEIGHT"), 14, Palette.CHARCOAL, true)
 	var bar := Rect2(44.0, 62.0, 200.0, 17.0)
 	canvas.draw_style_box(_gauge_bg, bar)
 	var fw := maxf(0.0, (bar.size.x - 6.0) * shown_weight)
 	if fw > 2.0:
 		canvas.draw_style_box(_gauge_fill, Rect2(bar.position.x + 3.0, bar.position.y + 3.0, maxf(fw, 11.0), bar.size.y - 6.0))
 	_txt(Vector2(44.0, 106.0), "%d%%" % int(round(shown_weight * 100.0)), 15, Palette.CHARCOAL, true)
-	_txt(Vector2(98.0, 106.0), player.params.band_name(shown_weight), 11, Palette.MID, true)
+	_txt(Vector2(98.0, 106.0), tr(player.params.band_key(shown_weight)), 11, Palette.MID, true)
 	# --- ração + pausa
 	var cx := canvas.size.x - 168.0
 	for i in 3:
@@ -109,8 +109,8 @@ func _draw_hud() -> void:
 	# --- dicas (somem aos poucos)
 	var a := 1.0
 	if hint_time < 16.0:
-		var line1 := "A D  MOVE     SHIFT  RUN     SPACE  JUMP     E  INTERACT     S+SPACE  DROP     ESC  PAUSE"
-		var line2 := "[1] [2]  WEIGHT TEST — temporary tool"
+		var line1 := tr("UI_HINT_CONTROLS")
+		var line2 := tr("UI_HINT_WEIGHT_TEST")
 		var w := maxf(_txt_w(line1, 12, true), _txt_w(line2, 12, true)) + 40.0
 		var pill := Rect2(40.0, canvas.size.y - 76.0, w, 50.0)
 		var sb := StyleBoxFlat.new()
@@ -129,15 +129,14 @@ func _draw_pause() -> void:
 	while sy < canvas.size.y:
 		canvas.draw_rect(Rect2(0.0, sy, canvas.size.x, 2.0), Palette.IVORY)
 		sy += 3.0
-	var panel := Rect2(canvas.size.x * 0.5 - 190.0, canvas.size.y * 0.5 - 170.0, 380.0, 340.0)
+	var panel := Rect2(canvas.size.x * 0.5 - 215.0, canvas.size.y * 0.5 - 170.0, 430.0, 340.0)
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Palette.IVORY
 	sb.border_color = Palette.INK
 	sb.set_border_width_all(3)
 	sb.set_corner_radius_all(18)
 	canvas.draw_style_box(sb, panel)
-	_txt(Vector2(panel.position.x + 36.0, panel.position.y + 62.0), "PAUSED", 26, Palette.INK, true)
-	_txt(Vector2(panel.position.x + 38.0, panel.position.y + 88.0), "一時停止", 14, Palette.MID, true)
+	_txt(Vector2(panel.position.x + 36.0, panel.position.y + 62.0), tr("UI_PAUSED"), 26, Palette.INK, true)
 	canvas.draw_line(Vector2(panel.position.x + 36.0, panel.position.y + 104.0), Vector2(panel.position.x + 96.0, panel.position.y + 104.0), Palette.INK, 2.0)
 	for i in _items.size():
 		var y := panel.position.y + 150.0 + i * 52.0
@@ -147,5 +146,5 @@ func _draw_pause() -> void:
 			pill.bg_color = Palette.INK
 			pill.set_corner_radius_all(14)
 			canvas.draw_style_box(pill, Rect2(panel.position.x + 28.0, y - 26.0, panel.size.x - 56.0, 40.0))
-		_txt(Vector2(panel.position.x + 52.0, y), _items[i], 18, Palette.IVORY if sel else Palette.CHARCOAL, true)
-	_txt(Vector2(panel.position.x + 36.0, panel.end.y - 22.0), "W S  SELECT     SPACE  CONFIRM     ESC  RESUME", 11, Palette.MID, true)
+		_txt(Vector2(panel.position.x + 52.0, y), tr("UI_" + _items[i]), 18, Palette.IVORY if sel else Palette.CHARCOAL, true)
+	_txt(Vector2(panel.position.x + 36.0, panel.end.y - 22.0), tr("UI_PAUSE_FOOTER"), 11, Palette.MID, true)

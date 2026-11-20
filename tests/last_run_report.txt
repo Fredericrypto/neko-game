@@ -43,8 +43,14 @@ PASS  lata: coletar aumenta o peso em ~10%  peso=0.400
 PASS  metabolismo: correr reduz o peso devagar  0.6000 -> 0.5925
 PASS  porta: E abre e a janela acende  open=1.00
 PASS  porta: E fecha  
+PASS  localização: CSV tem as chaves da interface  11 chaves
+PASS  localização: tradução em inglês carregada no jogo  PAUSED
+PASS  localização: toda chave usada na interface existe no CSV  []
+PASS  interface: nenhum texto japonês embutido nos scripts de UI  []
+PASS  interface: rodapé da pausa cabe no painel (430 px, margens de 36)  327 px
+PASS  localização: as 3 faixas de peso têm texto  
 PASS  queda no vazio: reaparece no ponto inicial  (220.0, 640.0)
 PASS  câmera: respeita o limite direito  centro=2643.5
 PASS  câmera: respeita o limite esquerdo  
 PASS  pose: parado é IDLE  
-Aprovados: 49   Falhos: 0
+Aprovados: 55   Falhos: 0

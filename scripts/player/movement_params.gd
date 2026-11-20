@@ -62,9 +62,10 @@ func sample(w: float, light: float, normal: float, heavy: float) -> float:
 		return lerpf(normal, heavy, (w - c_n) / (c_h - c_n))
 	return heavy
 
-func band_name(w: float) -> String:
+## Chave de tradução da faixa de peso (o texto vem de locale/strings.csv).
+func band_key(w: float) -> String:
 	if w <= band_light_max:
-		return "LIGHT"
+		return "UI_BAND_LIGHT"
 	if w <= band_normal_max:
-		return "NORMAL"
-	return "HEAVY"
+		return "UI_BAND_NORMAL"
+	return "UI_BAND_HEAVY"

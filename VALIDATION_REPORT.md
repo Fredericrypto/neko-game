@@ -11,7 +11,7 @@ Data: 18/11/2026. Engine: Godot 4.4.1 stable, GL Compatibility.
 - **Desempenho real não foi medido.** Software rendering não representa o seu notebook.
 - **Não foi gerado executável.** Os templates de exportação não estão instalados no sandbox; entrego o projeto completo.
 
-## Resultado dos testes automatizados: 49 aprovados, 0 falhos
+## Resultado dos testes automatizados: 55 aprovados, 0 falhos (49 do protótipo + 6 de localização/interface)
 
 Lista completa em `tests/last_run_report.txt`. O que cobrem:
 

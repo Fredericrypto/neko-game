@@ -302,6 +302,46 @@ func run_all() -> void:
 	await frames(60)
 	check("porta: E fecha", (not door.want_open) and door.open < 0.01)
 
+	# --- 11b. localização: interface em inglês, sem texto fixo nos scripts
+	TranslationServer.set_locale("en")
+	var keys := {}
+	var f := FileAccess.open("res://locale/strings.csv", FileAccess.READ)
+	f.get_csv_line()
+	while not f.eof_reached():
+		var row := f.get_csv_line()
+		if row.size() >= 2 and row[0] != "":
+			keys[row[0]] = row[1]
+	check("localização: CSV tem as chaves da interface", keys.has("UI_WEIGHT") and keys.has("UI_PAUSED") and keys.size() >= 11, "%d chaves" % keys.size())
+	check("localização: tradução em inglês carregada no jogo", TranslationServer.translate("UI_WEIGHT") == "WEIGHT" and TranslationServer.translate("UI_PAUSED") == "PAUSED", TranslationServer.translate("UI_PAUSED"))
+	var bad: Array[String] = []
+	var cjk_files: Array[String] = []
+	var rx := RegEx.new()
+	rx.compile("tr\\(\"([A-Z0-9_]+)\"\\)")
+	var dir := DirAccess.open("res://scripts/ui")
+	for fn in dir.get_files():
+		if not fn.ends_with(".gd"):
+			continue
+		var src := FileAccess.get_file_as_string("res://scripts/ui/" + fn)
+		for m in rx.search_all(src):
+			if not keys.has(m.get_string(1)):
+				bad.append(m.get_string(1))
+		for ch in src:
+			var code := ch.unicode_at(0)
+			if (code >= 0x3040 and code <= 0x30FF) or (code >= 0x4E00 and code <= 0x9FFF):
+				cjk_files.append(fn)
+				break
+	check("localização: toda chave usada na interface existe no CSV", bad.is_empty(), str(bad))
+	check("interface: nenhum texto japonês embutido nos scripts de UI", cjk_files.is_empty(), str(cjk_files))
+	var hud_font := FontVariation.new()
+	hud_font.base_font = load("res://assets/fonts/ZenKakuGothicNew-Medium.ttf")
+	hud_font.spacing_glyph = 3
+	var footer_w := hud_font.get_string_size(TranslationServer.translate("UI_PAUSE_FOOTER"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
+	check("interface: rodapé da pausa cabe no painel (430 px, margens de 36)", footer_w <= 430.0 - 72.0, "%.0f px" % footer_w)
+	var band_ok := true
+	for w in [0.1, 0.5, 0.9]:
+		band_ok = band_ok and keys.has(player.params.band_key(w))
+	check("localização: as 3 faixas de peso têm texto", band_ok)
+
 	# --- 12. respawn e câmera
 	player.global_position = Vector2(500.0, 1800.0)
 	await frames(3)
